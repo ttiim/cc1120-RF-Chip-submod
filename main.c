@@ -36,23 +36,6 @@
   *
   ******************************************************************************
   */
-/*
- * Authour: Timothy Wriglesworth
- *
- * In a typical system,
-	CC112X will interface to an MCU. This MCU must be able to communicate with the
-	CC112X over a 4-wire SPI interface to be able to:
-		-Configure the CC112X
-  	  	- Program CC112X  into different modes (RX, TX, SLEEP, IDLE, etc)
-  	  	- Read and write buffered data (RX FIFO and TX FIFO)
-  	  	-	 Read status information
-
- *
- */
-
-
-
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_hal.h"
@@ -83,6 +66,7 @@ static void MX_USART2_UART_Init(void);
 
 /* USER CODE END PFP */
 
+
 void num_print(uint8_t data)   //happy with function for now
 {
  uint8_t out[3];
@@ -91,7 +75,7 @@ void num_print(uint8_t data)   //happy with function for now
 }
 
 
-/*///To be honest i'm not sure why i wrote this but it was in the git. Come back to this: 18.06.19 TW
+/*///come back to FILE I/0 after spi works
 //&huart2,"Hello\r\n",7,1000
 void Binary_Print(char *data){
     int i=0;
@@ -112,6 +96,7 @@ void Binary_Print(char *data){
 }
 */
 
+
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -124,6 +109,10 @@ void Binary_Print(char *data){
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
+
+
+
 
   /* USER CODE END 1 */
 
@@ -173,15 +162,6 @@ int main(void)
   {
 
   /* USER CODE END WHILE */
-	  //Turn the LED off
-	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-	  //Wait 1 seconds
-	  HAL_Delay(1000);
-	  //Turn the LED on
-	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-	  //Wait 1 second
-	  HAL_Delay(1000);
-
 
   /* USER CODE BEGIN 3 */
 
@@ -259,7 +239,7 @@ static void MX_SPI2_Init(void)
   hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi2.Init.NSS = SPI_NSS_SOFT;
+  hspi2.Init.NSS = SPI_NSS_HARD_OUTPUT;
   hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
